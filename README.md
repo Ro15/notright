@@ -37,6 +37,24 @@ Navigate to http://localhost:5173 and upload a file.
 - Images are accepted but **no OCR in this MVP**; you’ll see a neutral “Unclear” result.
 - Labels use likelihood language only: “Likely AI”, “Unclear”, “Likely Human”.
 
+
+## Accuracy Upgrades (Hybrid Scoring)
+- The backend now scores long documents in multiple text segments and aggregates section-level results.
+- Additional linguistic signals are used (line repetition, paragraph uniformity, stopword balance, punctuation entropy).
+- Optional **LLM calibration** is supported via DeepSeek API, blended with local heuristics for a more stable final score.
+
+### Optional DeepSeek setup
+Set these environment variables before running the backend:
+
+```bash
+export DEEPSEEK_API_KEY=your_key_here
+# optional
+export DEEPSEEK_BASE_URL=https://api.deepseek.com
+export DEEPSEEK_MODEL=deepseek-chat
+```
+
+If `DEEPSEEK_API_KEY` is not set, the app uses local scoring only.
+
 ## Quick Tests
 - TXT: upload a small `.txt` to see preview and heuristic score.
 - PDF/DOCX: upload to verify text extraction and preview (first 500–1000 chars).
@@ -72,7 +90,11 @@ Navigate to http://localhost:5173 and upload a file.
   "ai_likelihood_score": 0,
   "label": "Likely AI | Unclear | Likely Human",
   "reasoning": ["..."],
-  "extracted_preview": "..."
+  "extracted_preview": "...",
+  "metadata": {
+    "local_score": 0,
+    "llm_used": false
+  }
 }
 ```
 
