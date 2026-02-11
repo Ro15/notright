@@ -47,9 +47,9 @@ Navigate to http://localhost:5173 and upload a file.
 Set these environment variables before running the backend:
 
 ```bash
-export DEEPSEEK_API_KEY=your_key_here
+export DEEPSEEK_API_KEY=sk-eed1fad2db044d4e80ee97eefc71b881
 # optional
-export DEEPSEEK_BASE_URL=https://api.deepseek.com
+export DEEPSEEK_BASE_URL=https://api.deepseek.com/v1
 export DEEPSEEK_MODEL=deepseek-chat
 ```
 
